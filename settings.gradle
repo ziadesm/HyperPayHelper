@@ -1,0 +1,25 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+        flatDir {
+            // This is where the *.jar or *.aar should be located
+            dirs "$rootProject.projectDir/HyperPay/libs"
+        }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        flatDir {
+            // This is where the *.jar or *.aar should be located
+            dirs "$rootProject.projectDir/HyperPay/libs"
+        }
+    }
+}
+rootProject.name = "HyperPayAndroidDemo"
+include ':app'
+include ':HyperPay'
