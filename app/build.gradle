@@ -34,7 +34,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.aar"])
     implementation project(path: ':HyperPay')
 
 

@@ -3,10 +3,7 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
-        flatDir {
-            // This is where the *.jar or *.aar should be located
-            dirs "$rootProject.projectDir/HyperPay/libs"
-        }
+
     }
 }
 dependencyResolutionManagement {
