@@ -1,6 +1,7 @@
 package com.app.hyperpay.builder
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 
 interface PaymentBuilder {
     /**

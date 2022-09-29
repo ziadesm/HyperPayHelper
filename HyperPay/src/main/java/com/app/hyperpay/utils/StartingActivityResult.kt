@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentActivity
 import com.app.hyperpay.builder.OnGettingResultBack
 
 class StartingActivityResult(
-    private val request: Int,
     private val mListener: OnGettingResultBack
 ) {
 
@@ -18,7 +17,7 @@ class StartingActivityResult(
     fun initFragmentResult(fragment: FragmentActivity): ActivityResultLauncher<Intent> {
         fragmentLaunchActivityResult = fragment.registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) result.data?.let { mListener.onGettingResult(request, it) }
+            result.data?.let { mListener.onGettingResult(result.resultCode, it) }
         }
         return fragmentLaunchActivityResult
     }
@@ -26,7 +25,7 @@ class StartingActivityResult(
     fun initActivityResult(act: AppCompatActivity): ActivityResultLauncher<Intent> {
         activityLaunchActivityResult = act.registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) result.data?.let { mListener.onGettingResult(request, it) }
+            result.data?.let { mListener.onGettingResult(result.resultCode, it) }
         }
         return activityLaunchActivityResult
     }

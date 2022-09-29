@@ -1,37 +1,37 @@
 package com.app.hyperpay.temp
+import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.LifecycleCoroutineScope
-import androidx.lifecycle.lifecycleScope
 import com.app.hyperpay.builder.OnGettingResultBack
 import com.app.hyperpay.builder.OnPaymentResponseCallback
 import com.app.hyperpay.builder.PaymentBuilder
+import com.app.hyperpay.helper_model.PaymentErrorModel
 import com.app.hyperpay.helper_model.PaymentResponse
+import com.app.hyperpay.helper_model.PaymentSuccessModel
 import com.app.hyperpay.utils.StartingActivityResult
 import com.oppwa.mobile.connect.checkout.dialog.CheckoutActivity
 import com.oppwa.mobile.connect.checkout.meta.CheckoutSettings
 import com.oppwa.mobile.connect.exception.PaymentError
 import com.oppwa.mobile.connect.provider.Connect
 import com.oppwa.mobile.connect.provider.Transaction
-import kotlinx.coroutines.launch
+import com.oppwa.mobile.connect.provider.TransactionType
 
 class PaymentHelper: PaymentBuilder, OnGettingResultBack  {
     private constructor(activity: AppCompatActivity, paymentCallback: OnPaymentResponseCallback) {
-        mActivity = activity
+        mContext = activity
         mPaymentModel = PaymentHelperModel()
         mPaymentResponse = paymentCallback
-        createStartingActivity(activity.lifecycleScope, activity)
+        createStartingActivity(activity)
     }
     private constructor(fragment: FragmentActivity, paymentCallback: OnPaymentResponseCallback) {
-        mActivity = fragment as AppCompatActivity
+        mContext = fragment
         mPaymentModel = PaymentHelperModel()
         mPaymentResponse = paymentCallback
-        createStartingFragment(fragment.lifecycleScope, fragment)
+        createStartingFragment(fragment)
     }
 
-    private var mActivity: AppCompatActivity? = null
+    private var mContext: Context? = null
     private var mPaymentModel: PaymentHelperModel? = null
     private var mStartPayment: StartingActivityResult? = null
     private var mPaymentResponse: OnPaymentResponseCallback? = null
@@ -60,27 +60,21 @@ class PaymentHelper: PaymentBuilder, OnGettingResultBack  {
         val checkoutSettings = CheckoutSettings(mPaymentModel?.checkout_id ?: "", mPaymentModel?.payment_type, mPaymentModel?.provider_mode!!)
         checkoutSettings.shopperResultUrl = "${mPaymentModel?.shopper_url}://result"
 
-        val intent = checkoutSettings.createCheckoutActivityIntent(mActivity)
+        val intent = checkoutSettings.createCheckoutActivityIntent(mContext)
         mStartPayment?.launchResultActivity(intent)
     }
 
-    private fun createStartingActivity(lifecycle: LifecycleCoroutineScope, activity: AppCompatActivity) {
-        lifecycle.launch {
-            mStartPayment = StartingActivityResult(
-                CheckoutActivity.REQUEST_CODE_CHECKOUT,
-                this@PaymentHelper
-            )
-            mStartPayment?.initActivityResult(activity)
-        }
+    private fun createStartingActivity(activity: AppCompatActivity) {
+        mStartPayment = StartingActivityResult(
+            this@PaymentHelper
+        )
+        mStartPayment?.initActivityResult(activity)
     }
-    private fun createStartingFragment(lifecycle: LifecycleCoroutineScope, fragment: FragmentActivity) {
-        lifecycle.launch {
-            mStartPayment = StartingActivityResult(
-                CheckoutActivity.REQUEST_CODE_CHECKOUT,
-                this@PaymentHelper
-            )
-            mStartPayment?.initFragmentResult(fragment)
-        }
+    private fun createStartingFragment(fragment: FragmentActivity) {
+        mStartPayment = StartingActivityResult(
+            this@PaymentHelper
+        )
+        mStartPayment?.initFragmentResult(fragment)
     }
 
     companion object {
@@ -97,20 +91,30 @@ class PaymentHelper: PaymentBuilder, OnGettingResultBack  {
             CheckoutActivity.RESULT_OK -> {
                 val transaction: Transaction? = data?.getParcelableExtra(CheckoutActivity.CHECKOUT_RESULT_TRANSACTION)
                 val resourcePath: String? = data?.getStringExtra(CheckoutActivity.CHECKOUT_RESULT_RESOURCE_PATH)
-                mPaymentResponse?.onPaymentResponseCallback(PaymentResponse.PaymentSuccess(transaction, resourcePath))
+                mPaymentResponse?.onPaymentResponseCallback(PaymentResponse.PaymentSuccess(
+                    PaymentSuccessModel(
+                        resourcePath,
+                        if (transaction?.transactionType == TransactionType.SYNC) PaymentSuccessModel.EnumTransactionType.SYNC
+                        else PaymentSuccessModel.EnumTransactionType.ASYNC,
+                    ),
+                    resourcePath
+                ))
             }
 
             CheckoutActivity.RESULT_CANCELED -> {
-                Log.e("PaymentResult", "onActivityResult: CANCEL >>>>> ")
                 mPaymentResponse?.onPaymentResponseCallback(PaymentResponse.PaymentCanceled)
             }
 
             CheckoutActivity.RESULT_ERROR -> {
-                val error: PaymentError? = data?.getParcelableExtra(CheckoutActivity.CHECKOUT_RESULT_ERROR)
-                mPaymentResponse?.onPaymentResponseCallback(PaymentResponse.PaymentFailed(error))
-                Log.e("PaymentResult", "onActivityResult: ERROR >>>>> ${error?.errorCode}")
-                Log.e("PaymentResult", "onActivityResult: ERROR >>>>> ${error?.errorInfo}")
-                Log.e("PaymentResult", "onActivityResult: ERROR >>>>> ${error?.errorMessage}")
+                val error: PaymentError? =
+                    data?.getParcelableExtra(CheckoutActivity.CHECKOUT_RESULT_ERROR)
+                mPaymentResponse?.onPaymentResponseCallback(PaymentResponse.PaymentFailed(
+                    PaymentErrorModel(
+                        error?.errorCode.toString(),
+                        error?.errorInfo,
+                        error?.errorMessage
+                    )
+                ))
             }
         }
     }
