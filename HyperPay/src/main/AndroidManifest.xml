@@ -6,7 +6,6 @@
 
     <application>
         <activity
-            tools:replace="android:theme"
             android:name="com.oppwa.mobile.connect.checkout.dialog.CheckoutActivity"
             android:theme="@style/Theme.Checkout.Light"
             android:exported="false"
