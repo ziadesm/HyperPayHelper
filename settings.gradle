@@ -13,7 +13,7 @@ dependencyResolutionManagement {
         mavenCentral()
         flatDir {
             // This is where the *.jar or *.aar should be located
-            dirs "$rootProject.projectDir/HyperPay/libs"
+            dirs "$rootProject.projectDir/oppwa.mobile"
         }
     }
 }
