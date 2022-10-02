@@ -7,7 +7,6 @@
     <application>
         <activity
             android:name="com.oppwa.mobile.connect.checkout.dialog.CheckoutActivity"
-            android:theme="@style/Theme.Checkout.Light"
             android:exported="false"
             android:launchMode="singleTop"
             tools:ignore="Instantiatable" />
