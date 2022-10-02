@@ -36,8 +36,8 @@ android {
 
 dependencies {
 
-    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    implementation(files("../HyperPay/libs/oppwa.mobile-2.56.0.aar"))
+    /*implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation(files("../HyperPay/libs/oppwa.mobile-2.56.0.aar"))*/
     implementation project(path: ':HyperPay')
 
     implementation 'androidx.core:core-ktx:1.7.0'
