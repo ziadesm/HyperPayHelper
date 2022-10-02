@@ -21,7 +21,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
+            matchingFallbacks = ['debug']
         }
     }
 
@@ -50,7 +50,7 @@ repositories {
 }
 
 dependencies {
-    implementation project(path: ':oppwa.mobile')
+    implementation project(path: ':oppwa.mobile', configuration: 'default')
 
 //    implementation files("/libs/oppwa.mobile-2.56.0.aar")
 //    implementation(name: 'oppwa.mobile-2.56.0', ext: 'aar')
