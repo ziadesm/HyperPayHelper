@@ -49,7 +49,7 @@ repositories {
 }
 
 dependencies {
-    implementationDependenciesMetadata fileTree(dir: 'libs', include: ['*.aar'])
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
 //    implementation files("/libs/oppwa.mobile-2.56.0.aar")
 //    implementation(name: 'oppwa.mobile-2.56.0', ext: 'aar')
 //    implementation fileTree(dir:'libs', include:['*.jar', '*.aar'])
