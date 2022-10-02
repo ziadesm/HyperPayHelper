@@ -12,10 +12,15 @@ buildscript {
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0'
 
     }
+
+
 }
 
-allprojects {
 
+
+allprojects {
+    group = "com.app"
+    version = "1.2.0"
     repositories {
         google()
         jcenter()

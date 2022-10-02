@@ -1,4 +1,4 @@
-rootProject.name = "HyperPayAndroidDemo"
+rootProject.name = "HyperPay"
 include ':oppwa.mobile'
 include ':app'
 include ':HyperPay'
