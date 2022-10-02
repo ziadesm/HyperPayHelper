@@ -2,6 +2,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        mavenLocal()
         maven { url 'https://jitpack.io' }
         maven { url 'https://maven.google.com' }
     }
@@ -13,43 +14,29 @@ buildscript {
     }
 }
 
-apply plugin: 'maven-publish'
-
 allprojects {
 
     repositories {
         google()
         jcenter()
         mavenCentral()
+        mavenLocal()
         maven { url 'https://jitpack.io' }
         maven { url 'https://maven.google.com' }
 
         //TODO -> Remove this again
-        flatDir {
-            dirs 'libs'
-            dirs project(':HyperPay').file('libs')
+        /*flatDir {
+//            dirs 'HyperPay'
+            dirs 'libs', 'HyperPay'
+//            dirs project(':HyperPay').file('libs')
         }
-
+*/
         /*flatDir {
             // This is where the *.jar or *.aar should be located
             dirs "$rootProject.projectDir/libs"
         }*/
     }
 
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = 'com.app'
-            artifactId = 'hyperpay'
-            version = "1.1.1"
-
-            pom {
-                description = 'A description of my library'
-            }
-        }
-    }
 }
 
 task clean(type: Delete) { delete rootProject.buildDir }

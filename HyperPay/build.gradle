@@ -6,6 +6,7 @@ plugins {
 android {
     namespace 'com.app.hyperpay'
     compileSdk 32
+    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         minSdk 21
@@ -35,12 +36,22 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+
+
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
-//    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly fileTree(dir: 'libs', include: ['*.aar'])
 //    implementation files("/libs/oppwa.mobile-2.56.0.aar")
-    implementation(name: 'oppwa.mobile-2.56.0', ext: 'aar')
+//    implementation(name: 'oppwa.mobile-2.56.0', ext: 'aar')
 //    implementation fileTree(dir:'libs', include:['*.jar', '*.aar'])
 
 
