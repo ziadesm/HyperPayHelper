@@ -29,7 +29,7 @@ repositories {
 }
 
 dependencies {
-   implementation 'com.github.ziadesm:HyperPayDemo:1.1.2'
+   implementation 'com.github.ziadesm:HyperPayDemo:1.2.0'
 }
 ```
 
@@ -39,6 +39,7 @@ PaymentHelper.Builder(this, this)
     .paymentType(hashSetOf("VISA", "MASTER", etc ...))
     .checkoutId(your checkout ID that getting from your server)
     .shopperResultUrl(applicationId)
+    .testMode(true)
     .build()
 ```
 
