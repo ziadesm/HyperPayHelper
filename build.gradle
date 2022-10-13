@@ -5,6 +5,7 @@ buildscript {
         mavenLocal()
         maven { url 'https://jitpack.io' }
         maven { url 'https://maven.google.com' }
+
     }
 
     dependencies {
@@ -16,11 +17,10 @@ buildscript {
 
 }
 
-
-
 allprojects {
-    group = "com.app"
-    version = "1.2.0"
+    group = "com.hyperpay.android"
+    version = "1.2.1"
+
     repositories {
         google()
         jcenter()
@@ -28,20 +28,42 @@ allprojects {
         mavenLocal()
         maven { url 'https://jitpack.io' }
         maven { url 'https://maven.google.com' }
-
-        //TODO -> Remove this again
-        /*flatDir {
-//            dirs 'HyperPay'
-            dirs 'libs', 'HyperPay'
-//            dirs project(':HyperPay').file('libs')
-        }
-*/
-        /*flatDir {
-            // This is where the *.jar or *.aar should be located
-            dirs "$rootProject.projectDir/libs"
-        }*/
     }
 
+
+
+}
+task clean(type: Delete) { delete rootProject.buildDir }
+
+
+subprojects {
+    apply plugin: "maven-publish"
+    project.afterEvaluate {
+        if (!plugins.hasPlugin("android")) {
+            publishing {
+                publications {
+                    maven(MavenPublication) {
+                        afterEvaluate {
+                            artifactId = "$project.name"
+                            if (plugins.hasPlugin("java")) {
+                                from components.java
+                            } else if (plugins.hasPlugin("hyper-pay")) {
+                                from components.release
+                            }
+                        }
+                        repositories {
+                            maven {
+                                url = "https://maven.pkg.github.com/ziadesm/HyperPayDemo/"
+                                credentials {
+                                    username = "ziadesm"
+                                    password = "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"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
-task clean(type: Delete) { delete rootProject.buildDir }

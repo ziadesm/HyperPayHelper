@@ -1,4 +1,4 @@
 rootProject.name = "HyperPay"
-include ':oppwa.mobile'
 include ':app'
-include ':HyperPay'
+include ':hyper-pay'
+include ':acceptsdk-release (2)'

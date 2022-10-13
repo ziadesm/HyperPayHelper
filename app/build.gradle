@@ -38,12 +38,11 @@ dependencies {
 
     /*implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     implementation(files("../HyperPay/libs/oppwa.mobile-2.56.0.aar"))*/
-    implementation project(path: ':HyperPay')
+    implementation project(path: ':hyper-pay')
 
     implementation 'androidx.core:core-ktx:1.7.0'
 
-
-
+//    implementation 'com.github.ziadesm:PaymobDemo:1.0.9'
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
