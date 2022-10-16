@@ -2,6 +2,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        jcenter()
         mavenLocal()
         maven { url 'https://jitpack.io' }
         maven { url 'https://maven.google.com' }
@@ -19,7 +20,7 @@ buildscript {
 
 allprojects {
     group = "com.hyperpay.android"
-    version = "1.2.1"
+    version = "1.2.3"
 
     repositories {
         google()
@@ -35,7 +36,7 @@ allprojects {
 }
 task clean(type: Delete) { delete rootProject.buildDir }
 
-
+/*
 subprojects {
     apply plugin: "maven-publish"
     project.afterEvaluate {
@@ -45,9 +46,9 @@ subprojects {
                     maven(MavenPublication) {
                         afterEvaluate {
                             artifactId = "$project.name"
-                            /*if (plugins.hasPlugin("java")) {
+                            *//*if (plugins.hasPlugin("java")) {
                                 from components.java
-                            } else */if (plugins.hasPlugin("hyper-pay")) {
+                            } else *//*if (plugins.hasPlugin("hyper-pay")) {
                                 from components.release
                             }
                         }
@@ -65,5 +66,5 @@ subprojects {
             }
         }
     }
-}
+}*/
 
