@@ -1,2 +1,18 @@
+/*configurations.maybeCreate("default")
+artifacts.add("default", file('oppwa.mobile-2.56.0.aar'))*/
+
+apply plugin: "maven-publish"
+
 configurations.maybeCreate("default")
-artifacts.add("default", file('oppwa.mobile-2.56.0.aar'))
+def publishArtifact = artifacts.add("default", file('oppwa.mobile-2.56.0.aar'))
+
+publishing {
+    publications {
+        aar(MavenPublication) {
+            groupId = 'com.app.androidhyper'
+            artifactId = 'hyperpayhelper'
+            version = '1.2.5'
+            artifact publishArtifact
+        }
+    }
+}
