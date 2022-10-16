@@ -1,4 +1,4 @@
 rootProject.name = "HyperPay"
 include ':app'
 include ':hyper-pay'
-include ':acceptsdk-release (2)'
+include ':acceptsdk-release'

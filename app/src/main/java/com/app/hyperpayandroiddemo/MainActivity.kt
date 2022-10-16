@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity(), OnPaymentResponseCallback {
             .testMode(false)
             .build()
 
-        PaymentHelper.Builder(this, this)
+//        PaymentHelper.Builder(this, this)
 
     }
 

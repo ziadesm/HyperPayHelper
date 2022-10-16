@@ -67,7 +67,7 @@ dependencies {
     //implementation(files("../libs/oppwa.mobile-2.56.0.aar"))
 //    implementation(name: 'oppwa.mobile-2.56.0', ext: 'aar')
 
-    implementation project(":acceptsdk-release (2)")
+    api project(":acceptsdk-release")
     implementation 'androidx.core:core-ktx:1.7.0'//
 
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
