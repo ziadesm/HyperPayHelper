@@ -1,0 +1,11 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.app.hyperpay" >
+4
+5    <uses-sdk
+6        android:minSdkVersion="21"
+6-->C:\Users\a3\Desktop\HyperPayDemo\acceptsdk-release\build\intermediates\tmp\ProcessLibraryManifest\release\tempAndroidManifest9719841356122369263.xml
+7        android:targetSdkVersion="32" />
+7-->C:\Users\a3\Desktop\HyperPayDemo\acceptsdk-release\build\intermediates\tmp\ProcessLibraryManifest\release\tempAndroidManifest9719841356122369263.xml
+8
+9</manifest>
