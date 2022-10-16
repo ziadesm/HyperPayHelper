@@ -45,9 +45,9 @@ subprojects {
                     maven(MavenPublication) {
                         afterEvaluate {
                             artifactId = "$project.name"
-                            if (plugins.hasPlugin("java")) {
+                            /*if (plugins.hasPlugin("java")) {
                                 from components.java
-                            } else if (plugins.hasPlugin("hyper-pay")) {
+                            } else */if (plugins.hasPlugin("hyper-pay")) {
                                 from components.release
                             }
                         }
