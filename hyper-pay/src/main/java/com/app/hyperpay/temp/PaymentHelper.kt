@@ -2,6 +2,7 @@ package com.app.hyperpay.temp
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.app.hyperpay.builder.OnGettingResultBack
 import com.app.hyperpay.builder.OnPaymentResponseCallback
@@ -24,8 +25,8 @@ class PaymentHelper: PaymentBuilder, OnGettingResultBack  {
         mPaymentResponse = paymentCallback
         createStartingActivity(activity)
     }
-    private constructor(fragment: FragmentActivity, paymentCallback: OnPaymentResponseCallback) {
-        mContext = fragment
+    private constructor(fragment: Fragment, paymentCallback: OnPaymentResponseCallback) {
+        mContext = fragment.requireContext()
         mPaymentModel = PaymentHelperModel()
         mPaymentResponse = paymentCallback
         createStartingFragment(fragment)
@@ -70,7 +71,7 @@ class PaymentHelper: PaymentBuilder, OnGettingResultBack  {
         )
         mStartPayment?.initActivityResult(activity)
     }
-    private fun createStartingFragment(fragment: FragmentActivity) {
+    private fun createStartingFragment(fragment: Fragment) {
         mStartPayment = StartingActivityResult(
             this@PaymentHelper
         )
@@ -81,7 +82,7 @@ class PaymentHelper: PaymentBuilder, OnGettingResultBack  {
         fun Builder(activity: AppCompatActivity, paymentCallback: OnPaymentResponseCallback): PaymentHelper {
             return PaymentHelper(activity, paymentCallback)
         }
-        fun Builder(fragment: FragmentActivity, paymentCallback: OnPaymentResponseCallback): PaymentHelper {
+        fun Builder(fragment: Fragment, paymentCallback: OnPaymentResponseCallback): PaymentHelper {
             return PaymentHelper(fragment, paymentCallback)
         }
     }

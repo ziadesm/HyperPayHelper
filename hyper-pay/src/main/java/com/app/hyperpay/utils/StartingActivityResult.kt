@@ -14,7 +14,7 @@ class StartingActivityResult(
 
     private lateinit var fragmentLaunchActivityResult: ActivityResultLauncher<Intent>
     private lateinit var activityLaunchActivityResult: ActivityResultLauncher<Intent>
-    fun initFragmentResult(fragment: FragmentActivity): ActivityResultLauncher<Intent> {
+    fun initFragmentResult(fragment: Fragment): ActivityResultLauncher<Intent> {
         fragmentLaunchActivityResult = fragment.registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) { result ->
             result.data?.let { mListener.onGettingResult(result.resultCode, it) }
