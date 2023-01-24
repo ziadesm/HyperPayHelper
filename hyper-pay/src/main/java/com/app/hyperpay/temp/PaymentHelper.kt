@@ -62,7 +62,11 @@ class PaymentHelper: PaymentBuilder, OnGettingResultBack  {
         checkoutSettings.shopperResultUrl = "${mPaymentModel?.shopper_url}://result"
 
         val intent = checkoutSettings.createCheckoutActivityIntent(mContext)
-        mStartPayment?.launchResultActivity(intent)
+        try {
+            mStartPayment?.launchResultActivity(intent)
+        } catch (e: Exception) {
+            mStartPayment?.launchResultFragment(intent)
+        }
     }
 
     private fun createStartingActivity(activity: AppCompatActivity) {
