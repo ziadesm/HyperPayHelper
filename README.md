@@ -29,7 +29,7 @@ repositories {
 }
 
 dependencies {
-   implementation 'com.github.ziadesm:HyperPayDemo:1.2.5'
+   implementation 'com.github.ziadesm:HyperPayDemo:1.2.8'
 }
 ```
 
